@@ -4,8 +4,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -14,7 +12,7 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String role;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
@@ -23,13 +21,17 @@ public class Role implements GrantedAuthority {
 
     }
 
-    public Role(String role) {
-        this.role = role;
+    public Role(long id) {
+        this.id = id;
     }
 
-    public Role(long id, String role) {
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role(long id, String name) {
         this.id = id;
-        this.role = role;
+        this.name = name;
     }
 
 
@@ -41,12 +43,12 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String role) {
+        this.name = role;
     }
 
     public List<User> getUsers() {
@@ -58,29 +60,8 @@ public class Role implements GrantedAuthority {
     }
 
 
-
     @Override
     public String getAuthority() {
-        return getRole();
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "role='" + role + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role1 = (Role) o;
-        return id == role1.id && Objects.equals(role, role1.role) && Objects.equals(users, role1.users);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, role, users);
+        return getName();
     }
 }
