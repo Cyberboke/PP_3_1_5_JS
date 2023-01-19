@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.demo.security.AuthProviderImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -31,18 +30,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 // доступ для незарегистрированных пользователей
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/login", "/error").permitAll()
                 // доступ для админа
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**", "/edit/**", "/new/**").hasRole("ADMIN")
                 // доступ для юзера
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-                // все остальные страницы требуют аутентификации
-                .anyRequest().authenticated()
+                // все остальные запросы только для админа
+                .anyRequest().hasRole("ADMIN")
                 .and()
-                // вход в систему
-                .formLogin().successHandler(successUserHandler).permitAll()
+                // аутентификация
+                .formLogin().loginPage("/login")
+                .loginProcessingUrl("/process_login")
+                .successHandler(successUserHandler).permitAll()
+                .failureUrl("/login?error")
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll();
+                // разлогинивание
+                .logout().logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Bean
