@@ -4,18 +4,16 @@
     <title>User page</title>
 </head>
 <body>
+<h1>Your data:</h1>
+<br/>
+<p th:text="${user.getId()}">VALUE</p>
+<p th:text="${user.getUsername()}">VALUE</p>
+<p th:text="${user.getPassword()}">VALUE</p>
+<p th:text="${user.getAge()}">VALUE</p>
+<p th:text="${user.getEmail()}">VALUE</p>
 
-<h2>User info</h2>
-
-<p>Username: <span th:text="${user.getUsername()}"></span></p>
-<p>Password: <span th:text="${user.getPassword()}"></span></p>
-<p>Age: <span th:text="${user.getAge()}"></span></p>
-<p>Email: <span th:text="${user.getEmail()}"></span></p>
-<p>Roles: </p>
-<p th:each="role : ${user.getRoles()}" th:text=" ${role.getName()}"></p>
-
-<br>
-<br>
+<br/>
+<hr/>
 <form th:action="@{/logout}" th:method="POST">
     <input type="submit" value="Logout">
 </form>

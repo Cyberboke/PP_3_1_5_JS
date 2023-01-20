@@ -55,6 +55,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -78,6 +79,7 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }

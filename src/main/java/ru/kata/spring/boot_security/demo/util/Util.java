@@ -37,7 +37,7 @@ public class Util {
         userList.add(roleUser);
 
         User admin = new User("admin", 20, "admin@gmail.com", "admin", adminList);
-        admin.setId(3L);
+        admin.setId(1L);
 
         User user = new User("user", 22, "user@gmail.com", "user", userList);
         user.setId(2L);
