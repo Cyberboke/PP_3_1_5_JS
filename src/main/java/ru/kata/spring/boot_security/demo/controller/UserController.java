@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String userPage(ModelMap modelMap, Principal principal) {
         Long id = userService.findByUsername(principal.getName()).get().getId();
         modelMap.addAttribute("user", userService.getById(id));

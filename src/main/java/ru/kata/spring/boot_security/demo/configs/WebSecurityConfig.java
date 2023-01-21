@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // доступ для незарегистрированных пользователей
                 .antMatchers("/", "/login", "/error").permitAll()
                 // доступ для админа
-                .antMatchers("/admin/**", "/edit/**", "/new/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 // доступ для юзера
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 // все остальные запросы только для админа
