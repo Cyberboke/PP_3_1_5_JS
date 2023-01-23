@@ -14,15 +14,17 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user1.setUsername(user.getUsername());
         user1.setAge(user.getAge());
         user1.setEmail(user.getEmail());
-        user1.setPassword(user.getPassword());
+        user1.setPassword(passwordEncoder.encode(user.getPassword()));
         user1.setRoles(user.getRoles());
         userRepository.save(user1);
     }
