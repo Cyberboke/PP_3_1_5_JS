@@ -36,10 +36,10 @@ public class Util {
         adminList.add(roleUser);
         userList.add(roleUser);
 
-        User admin = new User("admin", 20, "admin@gmail.com", "admin", adminList);
+        User admin = new User("admin", "adminov", 20, "admin@gmail.com", "admin", adminList);
         admin.setId(1L);
 
-        User user = new User("user", 22, "user@gmail.com", "user", userList);
+        User user = new User("user", "userov", 22, "user@gmail.com", "user", userList);
         user.setId(2L);
 
         userService.save(admin);

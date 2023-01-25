@@ -15,7 +15,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String name;
+
+    private String lastName;
 
     private int age;
 
@@ -33,14 +35,15 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, List<Role> roles) {
-        this.username = username;
+    public User(String email, String password, List<Role> roles) {
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
-    public User(String username, int age, String email, String password, List<Role> roles) {
-        this.username = username;
+    public User(String name, String lastName, int age, String email, String password, List<Role> roles) {
+        this.name = name;
+        this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
@@ -55,14 +58,20 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     public int getAge() {
         return age;
     }
@@ -83,6 +92,12 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -119,4 +134,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

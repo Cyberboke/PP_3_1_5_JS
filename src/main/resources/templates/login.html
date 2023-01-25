@@ -14,14 +14,13 @@
         <div class="d-md-block col-3 mx-auto">
             <br>
             <form name="f" method="post" action="/process_login">
-                <h2 class="form-signin-heading"><strong>Please sign in</strong></h2>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                <h2 class="form-signin-heading fw-bold py-2">Please sign in</h2>
+                <input type="text" name="username" class="form-control" id="username" placeholder="Email address">
                 <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 <div class="mb-2 bd-highlight"></div>
                 <button type="submit" class="btn btn-lg btn-primary btn-block form-control">Sign in</button>
                 <div th:if="${param.error}" class="alert alert-danger text-center" role="alert">
-                    Incorrect username or password!
+                    Incorrect email or password!
                 </div>
             </form>
         </div>

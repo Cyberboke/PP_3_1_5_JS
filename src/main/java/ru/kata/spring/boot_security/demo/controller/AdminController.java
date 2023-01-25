@@ -25,7 +25,7 @@ public class AdminController {
     @GetMapping
     public String getAllUsers(@ModelAttribute("user") User user,
                               Principal principal, Model model) {
-        Long id = userService.findByUsername(principal.getName()).get().getId();
+        Long id = userService.findByEmail(principal.getName()).get().getId();
         model.addAttribute("admin", userService.getById(id));
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleService.getRoles());

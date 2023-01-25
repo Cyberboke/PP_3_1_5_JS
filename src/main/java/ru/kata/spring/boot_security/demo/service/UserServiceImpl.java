@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +32,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -63,7 +62,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public void edit(long id, User user) {
         User user1 = userRepository.getById(id);
-        user1.setUsername(user.getUsername());
+        user1.setName(user.getName());
+        user1.setLastName(user.getLastName());
         user1.setAge(user.getAge());
         user1.setEmail(user.getEmail());
         user1.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -72,12 +72,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
-            throw new UsernameNotFoundException(String.format("User with email %s not found", username));
+            throw new UsernameNotFoundException(String.format("User with email %s not found", email));
         }
-        return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(),
                 user.get().getAuthorities());
     }
 }
