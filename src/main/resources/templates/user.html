@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -44,7 +47,9 @@
         <div class="col-2" style="padding: 15px 0 0">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#userPanel">User</a>
+                    <a class="nav-link active" href="#userPanel"
+                       sec:authorize="hasAuthority('ROLE_USER')" role="tab"
+                       aria-controls="v-pills-profile" aria-selected="false">User</a>
                 </li>
             </ul>
         </div>
