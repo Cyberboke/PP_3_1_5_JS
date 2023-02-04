@@ -18,8 +18,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-
-    @GetMapping()
+    @GetMapping("/admin")
     public String viewUsers(Principal principal, Model model) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
