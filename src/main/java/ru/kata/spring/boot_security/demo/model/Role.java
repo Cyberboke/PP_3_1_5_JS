@@ -16,7 +16,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @Transient
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
     private List<User> users;
 
     public Role() {
