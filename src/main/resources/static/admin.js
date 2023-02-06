@@ -72,6 +72,7 @@ const age = document.getElementById('age')
 const email = document.getElementById('email')
 const password = document.getElementById('password')
 const roles = document.getElementById('userRole')
+const btnNewUser = document.getElementById('btnNewUser')
 let option = ''
 
  btnNewUser.addEventListener('click', () => {
@@ -101,18 +102,20 @@ formNew.addEventListener('submit', (e) => {
         },
         body: JSON.stringify({
             name: name.value,
-            lastname: lastname.value,
+            lastName: lastname.value,
             age: age.value,
             email: email.value,
             password: password.value,
             roles: listRoles
         })
     })
+        .then(formNew.reset())
         .then(res => res.json())
         .then(data => showUsers(data))
         .catch(error => console.log(error))
         .then(reloadShowUsers)
     $('.nav-tabs a[href="#nav-admin"]').tab('show')
+
 })
 
 // Edit modal
@@ -178,7 +181,7 @@ editForm.addEventListener('submit', (e) => {
         body: JSON.stringify({
             id: idForm,
             name: nameEdit.value,
-            lastname: lastnameEdit.value,
+            lastName: lastnameEdit.value,
             age: ageEdit.value,
             email: emailEdit.value,
             password: passwordEdit.value,
@@ -214,7 +217,7 @@ on(document, 'click', '.btnDelete', e => {
     const getUserById = (user) => {
         idDelete.value = user.id
         nameDelete.value = user.name
-        lastnameDelete.value = user.lastname
+        lastnameDelete.value = user.lastName
         ageDelete.value = user.age
         emailDelete.value = user.email
         rolesDelete.innerHTML = `
